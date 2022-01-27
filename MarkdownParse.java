@@ -18,6 +18,10 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
+            if(currentIndex < 0){
+                System.out.println("Code broke!");
+                break;
+            }
             currentIndex = closeParen + 1;
         }
         return toReturn;
