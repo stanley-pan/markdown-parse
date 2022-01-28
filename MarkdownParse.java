@@ -20,8 +20,7 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             if(currentIndex < 0){
-                System.out.println("Code broke!");
-                break;
+                return toReturn;
             }
             currentIndex = closeParen + 1;
         }
