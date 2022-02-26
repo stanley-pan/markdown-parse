@@ -9,7 +9,7 @@ import org.junit.*;
 public class MarkdownParseTest {
     @Test
     public void addition() {
-        assertEquals(3, 1 + 1);
+        assertEquals(2, 1 + 1);
     }
     @Test
     public void getLinks() throws IOException{
@@ -25,15 +25,15 @@ public class MarkdownParseTest {
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         List<String> linkList = List.of();
-        assertEquals(null, links);
+        assertEquals(linkList, links);
     }
     @Test
     public void getLinks3() throws IOException{
         Path fileName = Path.of("test-file2.md");
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        List<String> linkList = List.of("https://som(eth)ing.com");
-        assertEquals(null, links);
+        List<String> linkList = List.of("https://som(eth");
+        assertEquals(linkList, links);
     }
     @Test
     public void getLinks4() throws IOException{
@@ -41,7 +41,7 @@ public class MarkdownParseTest {
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         List<String> linkList = List.of();
-        assertEquals(null, links);
+        assertEquals(linkList, links);
     }
 
     @Test
@@ -49,6 +49,22 @@ public class MarkdownParseTest {
 	    String contents = Files.readString(Path.of("snippet1.md"));
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         List<String> linkList = List.of("url.com", "`google.com", "google.com", "ucsd.edu");
+        assertEquals(linkList, links);
+    }
+
+    @Test
+    public void snippet2() throws IOException{
+	    String contents = Files.readString(Path.of("snippet2.md"));
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        List<String> linkList = List.of("a.com", "a.com((", "example.com");
+        assertEquals(linkList, links);
+    }
+
+    @Test
+    public void snippet3() throws IOException{
+	    String contents = Files.readString(Path.of("snippet3.md"));
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        List<String> linkList = List.of("https://ucsd-cse15l-w22.github.io/");
         assertEquals(linkList, links);
     }
 }
