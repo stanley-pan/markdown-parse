@@ -48,7 +48,7 @@ public class MarkdownParseTest {
     public void snippet1() throws IOException{
 	    String contents = Files.readString(Path.of("snippet1.md"));
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        List<String> linkList = List.of("url.com", "`google.com", "google.com", "ucsd.edu");
+        List<String> linkList = List.of("`google.com");
         assertEquals(linkList, links);
     }
 
